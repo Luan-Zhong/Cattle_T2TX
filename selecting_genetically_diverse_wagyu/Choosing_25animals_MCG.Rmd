@@ -1,0 +1,135 @@
+---
+title: "Choosing 25 animal by MCG"
+author: "Thien"
+date: "2024-04-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(magrittr)
+library(tools)
+library(RColorBrewer)
+library(readxl)
+library(MASS)
+library(Matrix)
+library(Matrix)
+library(tidyverse)
+library(reshape2)
+library(psych)
+library(data.table)
+getwd()
+# Read in the original GRM
+grm_file <- "3DN-8855_22533-Bent_Matrix-2023_10_18_14_26_20.tsv.gz"
+
+animals_path <- "Active_Animals_Selecting.csv"
+
+G <- read_tsv(grm_file, col_names = TRUE, skip = 0) %>% as_tibble()
+G %>% dim() 
+G[1:8, 1:10]
+
+G %<>% as.matrix()
+rownames(G) <- colnames(G)
+
+# Read in the Active_Animals_Selecting.csv file and assign it to a variable
+# called `animals`. Update path accordingly.
+active_animals <- read.csv("Active_Animals_Selecting.csv", header = TRUE, skip = 0)
+
+animals_calf_number <- read.csv("Animals_calf.csv", header = TRUE, skip = 0)
+
+# subset animals ID from animals_calf_number if appear in the active_animals
+animals <- left_join(active_animals, animals_calf_number, by = "ID")
+
+#subset animals have 1 calf
+
+animals <- animals[animals$Calf_Number == 1, ]
+
+grm_ids <- colnames(G)
+animals_ids <- animals$ID
+
+# Let's find the overlap between the GRM IDs and the Animals IDs
+common_ids <- intersect(grm_ids, animals_ids)
+length(common_ids) #1166 animals common btwn GRM and maddie
+
+# Filter the g matrix to only have rows and columns that are in the common_ids
+G <- G[common_ids, common_ids]
+
+#Saving G matrix
+
+write.csv(G, "G_matrix.csv", row.names = TRUE)
+
+#run with full matrix
+g <- G
+dim(g)
+
+#loop
+#Read in a MasterList object containing a list of IDs that have DNA on file.
+MasterList <- read_csv(animals_path, col_names = TRUE, skip = 0) %>% as_tibble()
+
+#Get a list of names in A matrix
+A_names <- colnames(g) %>% as_data_frame()   #creating a list of names in A (could also be G)
+
+
+#Assign DNA availability
+A_names$DNA_avail <- ifelse(A_names$value %in% MasterList$ID, 1, 0) #assuming a MasterList object with the column ID has been read in
+#animals that are in the list get a "1" = DNA available
+#animals that are not in the list get "0" = NO DNA available                
+
+
+###Save A_names into csv file
+#write.csv(A_names, file = "A_names_rm1.csv", row.names = FALSE)
+
+#A_names1 <- read.csv("A_names_rm.csv", header = TRUE, skip = 0)
+
+#running the MCA method with genotyped animals only available for selection
+DNA_avail <- vector(mode = "integer")    #a vector of DNA availability
+DNA_avail <- A_names$DNA_avail           #adding availabilty to the vector
+
+#initializing vectors
+selected <- vector(mode = "character")   #animal ids of selected animals
+y <- vector(mode = "integer")            #row-number of selected animal in GRM
+maxtrace <- vector(mode = 'integer')     # vector of selected maximum trace values - used to select animals
+trace_g_star <- vector(mode = 'integer') # vector of tr(G*) after each individual candidate animal is selected
+
+#loop
+gd <- g   #setting A to gd so that we are using pedigree relationship matrix
+
+
+for (n in 1:25){                          #for n repetitions (i.e. select n animals)
+  v <- rep(NA_integer_, nrow(gd))         #storage vector of calculated product/trace values for each animal
+  
+  for (i in 1:nrow(gd)){
+    x <- gd[i,] %>% as.matrix            #for each row (animal) in A
+    product <- (t(x) %*% x) / gd[i,i]    #multiply by its transpose and divide by its own diagonal
+    v[i] <- product                     #store trace statistic (equivalent to product value) calculated for each animal      
+  }
+  
+  v <- v * DNA_avail                                              #Multiply each animals trace statistic by their DNA availability
+  maxtrace <- c(maxtrace,max(v[is.finite(v)],na.rm=t))            #store the max-trace value used to select the candidate animal
+  y <- c(y,which(v == max(v[is.finite(v)])))                      #get which rows have the max trace statistic each iteration and store it
+  z <- which(v == max(v[is.finite(v)]))                           #the latest animal to be selected
+  selected <- c(selected, rownames(gd)[z])                        #get the rownames for the selected animals
+  
+  
+  
+  #calculate G*
+  
+  A11 <- g %>% as.matrix()
+  A22inv <- solve(g[y,y])%>% as.matrix()           #get the relationship between selected animals
+  A12 <- g[,y] %>% as.matrix()                     #get the relationship of selected animals to others
+  gstar <- A11 - (A12 %*% A22inv %*% t(A12))
+  gd <- gstar
+  
+  trace_g_star <- c(trace_g_star ,psych::tr(gstar))
+  
+}
+
+print(selected)
+
+# 25 animals
+#"3DWFQ0404"   "3DWFQ0459"   "3DWFN0018"   "3DWFP0413"   "3DWFQ0177"   "3DWF22T0070" "3DWFP0355"   "WGWFL0149"  
+#"3DWFS0137"   "3DWFR0017"   "3DWF22T0415" "3DWF22T0240" "3DWFQ0458"   "3DWFS0123"   "3DWF22T0036" "3DWF22T0549"
+#"3DWFR0281"   "3DWFS0069"   "3DWFS0202"   "3DWFP0398"   "3DWFP0416"   "3DWFQ0389"   "3DWFR0043"   "WGWFJ0085"  
+#"3DWFR0261" 
