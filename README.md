@@ -8,12 +8,12 @@ Collection of scripts used in the Wagyu T2T manuscript
 3. [Genome assembly and polishing](genome_assembly_and_polishing)
 4. Assembly evaluation
 5. Annotation and mining of new genes
-6. rDNA copies
-7. Repeat annotation - Autosomes
-8. Repeat annotation - X chromosome
+6. [rDNA copies](rDNA_copies)
+7. [Repeat annotation - Autosomes](repeat_annotation_autosomes)
+8. [Repeat annotation - X chromosome](repeat_annotation_X_chromosome)
 9. Selecting Genetically diverse Wagyu samples
 10. Long-read sequencing of Wagyu Samples
-11. Methylated CpG and CpG enrichment analysis
+11. [Methylated CpG and CpG enrichment analysis](methylated_CpG_and_enrichment)
 12. CENP-A enrichment
 13. Conservation of PAR
-14. Gene expression
+14. [Gene expression](Testis_gene_expression)
