@@ -7,7 +7,7 @@ Collection of scripts used in the Wagyu T2T manuscript
 2. Error correction of ONT reads
 3. [Genome assembly and polishing](genome_assembly_and_polishing)
 4. Assembly evaluation
-5. [Annotation and mining of new genes](annotation_analyses) TODO: tidy up notebooks
+5. [Annotation and mining of new genes](annotation_analyses)
 6. [rDNA copies](rDNA_copies)
 7. [Repeat annotation - Autosomes](repeat_annotation_autosomes)
 8. [Repeat annotation - X chromosome](repeat_annotation_X_chromosome)
