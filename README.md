@@ -15,5 +15,5 @@ Collection of scripts used in the Wagyu T2T manuscript
 10. [Long-read sequencing of Wagyu Samples](long_read_sequencing_20_wagyu)
 11. [Methylated CpG and CpG enrichment analysis](methylated_CpG_and_enrichment)
 12. CENP-A enrichment - See protocol described [here](https://doi.org/10.1038/s41467-024-52384-5)
-13. Conservation of PAR
+13. [Conservation of PAR](conservation_of_par)
 14. [Gene expression](Testis_gene_expression)
