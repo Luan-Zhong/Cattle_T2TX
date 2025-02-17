@@ -4,9 +4,9 @@ Collection of scripts used in the Wagyu T2T manuscript
 ## Methods
 
 1. [Sequencing the Trio](sequencing_the_trio)
-2. Error correction of ONT reads
+2. [Error correction of ONT reads](error_correction_of_ont_reads)
 3. [Genome assembly and polishing](genome_assembly_and_polishing)
-4. Assembly evaluation
+4. [Assembly evaluation](assembly_evaluation)
 5. [Annotation and mining of new genes](annotation_analyses)
 6. [rDNA copies](rDNA_copies)
 7. [Repeat annotation - Autosomes](repeat_annotation_autosomes)
