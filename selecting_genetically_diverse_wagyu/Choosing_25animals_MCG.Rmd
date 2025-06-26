@@ -34,7 +34,7 @@ G %<>% as.matrix()
 rownames(G) <- colnames(G)
 
 # Read in the Active_Animals_Selecting.csv file and assign it to a variable
-# called `animals`. Update path accordingly.
+# called `animals`. Update path accordingly. This contains IDs of animals present within the GRM.
 active_animals <- read.csv("Active_Animals_Selecting.csv", header = TRUE, skip = 0)
 
 animals_calf_number <- read.csv("Animals_calf.csv", header = TRUE, skip = 0)
