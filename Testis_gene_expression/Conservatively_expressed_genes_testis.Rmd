@@ -30,8 +30,9 @@ library(GenomicRanges)
 ## Cattle
 
 ```{r}
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Cattle/counts_Cattle_UOA_Wagyu_1_Y.rda")
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Cattle/annotation_Cattle.UOA_Wagyu_1_Y.rda")
+#The rda files was saved from script Feature_count_on_bams.Rmd
+load("/T2T_paper/Gene_expression_X_Y/Cattle/counts_Cattle_UOA_Wagyu_1_Y.rda")
+load("/T2T_paper/Gene_expression_X_Y/Cattle/annotation_Cattle.UOA_Wagyu_1_Y.rda")
 
 colnames(countsensembl$counts) <- gsub(".sorted.bam","",colnames(countsensembl$counts))
 
@@ -71,15 +72,15 @@ count_anno_list <- calcNormFactors(count_anno_list, method="TMM")
 
 count_anno_list$anno$chr %>% table()
 
-write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Cattle_count_anno_list_TMM.rds")
+write_rds(count_anno_list,"/T2T_paper/Gene_expression_X_Y/Expressed_genes/Cattle_count_anno_list_TMM.rds")
 ```
 
 ## Human
 
 ```{r}
 
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Human/counts_Human_T2T-CHM13v2.0.rda")
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Human/annotation_Human.T2T-CHM13v2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Human/counts_Human_T2T-CHM13v2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Human/annotation_Human.T2T-CHM13v2.0.rda")
 
 colnames(countsensembl$counts) <- gsub(".sorted.bam","",colnames(countsensembl$counts))
 
@@ -119,7 +120,7 @@ count_anno_list <- calcNormFactors(count_anno_list, method="TMM")
 
 count_anno_list$anno$chr %>% table()
 
-write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Human_count_anno_list_TMM.rds")
+write_rds(count_anno_list,"/T2T_paper/Gene_expression_X_Y/Expressed_genes/Human_count_anno_list_TMM.rds")
 ```
 
 
@@ -127,8 +128,8 @@ write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_e
 
 ```{r}
 
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Chimpanzee/counts_Chimpanzee_T2Tv2.0.rda")
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Chimpanzee/annotation_Chimpanzee.T2Tv2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Chimpanzee/counts_Chimpanzee_T2Tv2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Chimpanzee/annotation_Chimpanzee.T2Tv2.0.rda")
 
 colnames(countsensembl$counts) <- gsub(".sorted.bam","",colnames(countsensembl$counts))
 
@@ -168,17 +169,17 @@ count_anno_list <- calcNormFactors(count_anno_list, method="TMM")
 
 count_anno_list$anno$chr %>% table()
 
-write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Chimpanzee_count_anno_list_TMM.rds")
+write_rds(count_anno_list,"/T2T_paper/Gene_expression_X_Y/Expressed_genes/Chimpanzee_count_anno_list_TMM.rds")
 ```
 ## Gorilla
 
 ```{r}
 
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Gorilla/PRJEB48233/counts_PRJEB48233_Gorilla.T2Tv2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Gorilla/PRJEB48233/counts_PRJEB48233_Gorilla.T2Tv2.0.rda")
 
 countsensembl_1 <- countsensembl
 
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Gorilla/PRJNA304995/counts_PRJNA304995_Gorilla.T2Tv2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Gorilla/PRJNA304995/counts_PRJNA304995_Gorilla.T2Tv2.0.rda")
 
 countsensembl_2 <- countsensembl
 table(countsensembl_2$annotation$GeneID == countsensembl_1$annotation$GeneID)
@@ -188,7 +189,7 @@ rm(countsensembl_1)
 rm(countsensembl_2)
 
 
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Gorilla/annotation_Gorilla.T2Tv2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Gorilla/annotation_Gorilla.T2Tv2.0.rda")
 
 colnames(countsensembl$counts) <- gsub(".sorted.bam","",colnames(countsensembl$counts))
 
@@ -228,15 +229,15 @@ count_anno_list <- calcNormFactors(count_anno_list, method="TMM")
 
 count_anno_list$anno$chr %>% table()
 
-write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Gorilla_count_anno_list_TMM.rds")
+write_rds(count_anno_list,"/T2T_paper/Gene_expression_X_Y/Expressed_genes/Gorilla_count_anno_list_TMM.rds")
 ```
 
 ## Bornean_orangutan
 
 ```{r}
 
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/counts_B_orangutan_T2Tv2.0.gtf.rda")
-load("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/annotation_Bornean_orangutan.T2Tv2.0.rda")
+load("/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/counts_B_orangutan_T2Tv2.0.gtf.rda")
+load("/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/annotation_Bornean_orangutan.T2Tv2.0.rda")
 
 colnames(countsensembl$counts) <- gsub(".sorted.bam","",colnames(countsensembl$counts))
 
@@ -276,7 +277,7 @@ count_anno_list <- calcNormFactors(count_anno_list, method="TMM")
 
 count_anno_list$anno$chr %>% table()
 
-write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Bornean_orangutan_count_anno_list_TMM.rds")
+write_rds(count_anno_list,"/T2T_paper/Gene_expression_X_Y/Expressed_genes/Bornean_orangutan_count_anno_list_TMM.rds")
 ```
 
 
@@ -285,7 +286,7 @@ write_rds(count_anno_list,"/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_e
 ## The conserved genes in X PAR 
 ### Cattle
 ```{r}
-Cattle_count_anno_list_TMM <- readRDS("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Cattle_count_anno_list_TMM.rds")
+Cattle_count_anno_list_TMM <- readRDS("/T2T_paper/Gene_expression_X_Y/Expressed_genes/Cattle_count_anno_list_TMM.rds")
 
 # BDA20
 
@@ -313,7 +314,7 @@ Cattle_count_anno_list_TMM$anno %>% filter(gene_biotype %in% "protein_coding") %
 
 
 ```{r}
-Cattle_PAR_X <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S2_X_gene_annotation_PAR.xlsx", sheet = 1)
+Cattle_PAR_X <- read_xlsx("/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S2_X_gene_annotation_PAR.xlsx", sheet = 1)
 
 Cattle_PAR_X$gene_id <- Cattle_PAR_X$Annotation %>% gsub(";.*","",.)
 
@@ -324,13 +325,13 @@ Cattle_PAR_X_expressed
 ### Human
 
 ```{r}
-Human_count_anno_list_TMM <- readRDS("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Human_count_anno_list_TMM.rds")
+Human_count_anno_list_TMM <- readRDS("/T2T_paper/Gene_expression_X_Y/Expressed_genes/Human_count_anno_list_TMM.rds")
 
 Human_count_anno_list_TMM$anno$chr %>% table()
 ```
 
 ```{r}
-Human_PAR_X <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S2_X_gene_annotation_PAR.xlsx", sheet = 2)
+Human_PAR_X <- read_xlsx("/T2T_paper/Gene_expression_X_Y/inputs/Table_S11_PARGenesX.xlsx", sheet = 2)
 
 Human_PAR_X$gene_id <- Human_PAR_X$Annotation %>% gsub(".*ID=gene-","",.) %>% gsub(";.*","",.)
 
@@ -342,14 +343,14 @@ Human_PAR_X_expressed
 ### Chimpanzee
 
 ```{r}
-Chimpanzee_count_anno_list_TMM <- readRDS("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Chimpanzee_count_anno_list_TMM.rds")
+Chimpanzee_count_anno_list_TMM <- readRDS("/T2T_paper/Gene_expression_X_Y/Expressed_genes/Chimpanzee_count_anno_list_TMM.rds")
 
 
 Chimpanzee_count_anno_list_TMM$anno$chr %>% table()
 ```
 
 ```{r}
-Chimpanzee_PAR_X <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S2_X_gene_annotation_PAR.xlsx", sheet = 3)
+Chimpanzee_PAR_X <- read_xlsx("/T2T_paper/Gene_expression_X_Y/inputs/Table_S11_PARGenesX.xlsx", sheet = 3)
 
 Chimpanzee_PAR_X$gene_id <- Chimpanzee_PAR_X$Annotation %>% gsub(".*ID=gene-","",.) %>% gsub(";.*","",.)
 
@@ -361,14 +362,14 @@ Chimpanzee_PAR_X_expressed
 ### Gorilla
 
 ```{r}
-Gorilla_count_anno_list_TMM <- readRDS("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Gorilla_count_anno_list_TMM.rds")
+Gorilla_count_anno_list_TMM <- readRDS("/T2T_paper/Gene_expression_X_Y/Expressed_genes/Gorilla_count_anno_list_TMM.rds")
 
 
 Gorilla_count_anno_list_TMM$anno$chr %>% table()
 ```
 
 ```{r}
-Gorilla_PAR_X <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S2_X_gene_annotation_PAR.xlsx", sheet = 4)
+Gorilla_PAR_X <- read_xlsx("/T2T_paper/Gene_expression_X_Y/inputs/Table_S11_PARGenesX.xlsx", sheet = 4)
 
 Gorilla_PAR_X$gene_id <- Gorilla_PAR_X$Annotation %>% gsub(".*ID=gene-","",.) %>% gsub(";.*","",.)
 
@@ -380,14 +381,14 @@ Gorilla_PAR_X_expressed
 ### Bornean_orangutan
 
 ```{r}
-Bornean_orangutan_count_anno_list_TMM <- readRDS("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Bornean_orangutan_count_anno_list_TMM.rds")
+Bornean_orangutan_count_anno_list_TMM <- readRDS("/T2T_paper/Gene_expression_X_Y/Expressed_genes/Bornean_orangutan_count_anno_list_TMM.rds")
 
 
 Bornean_orangutan_count_anno_list_TMM$anno$chr %>% table()
 ```
 
 ```{r}
-Bornean_orangutan_PAR_X <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S2_X_gene_annotation_PAR.xlsx", sheet = 5)
+Bornean_orangutan_PAR_X <- read_xlsx("/T2T_paper/Gene_expression_X_Y/inputs/Table_S11_PARGenesX.xlsx", sheet = 5)
 
 Bornean_orangutan_PAR_X$gene_id <- Bornean_orangutan_PAR_X$Annotation %>% gsub(".*ID=gene-","",.) %>% gsub(";.*","",.)
 
@@ -401,7 +402,7 @@ Bornean_orangutan_PAR_X_expressed
 base::Reduce(intersect, list(Cattle_PAR_X_expressed$Gene,Human_PAR_X_expressed$Gene,Chimpanzee_PAR_X_expressed$Gene,Gorilla_PAR_X_expressed$Gene, Gorilla_PAR_X_expressed$Gene, Bornean_orangutan_PAR_X_expressed$Gene))
 
 
-Gene_order <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/annotation_gene_order/Final_annotation_for_plot/Fig2_PAR_X/Gene_order_Fig2_PAR_X_final.xlsx", col_names = F) %>%
+Gene_order <- read_xlsx("/T2T_paper/Gene_expression_X_Y/inputs/Gene_order_PAR_X_for_Fig5b.xlsx", col_names = F) %>%
   set_colnames("gene_id")
 
 Cattle_PAR_X_expressed_counts <- Cattle_count_anno_list_TMM$counts[Cattle_PAR_X_expressed$gene_id,] %>%
@@ -431,16 +432,17 @@ Bornean_orangutan_PAR_X_expressed_counts <- Bornean_orangutan_count_anno_list_TM
                            rownames_to_column("gene_id") %>% 
   left_join(Bornean_orangutan_PAR_X_expressed[,c("Gene","gene_id")], by = "gene_id")
 
-# 
-# Gene_order %>%
-#   left_join(Cattle_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Human_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Chimpanzee_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Gorilla_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Bornean_orangutan_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   write_csv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/PAR_X_expressed_counts.csv")
 
-PAR_X_expressed_counts_edited <- read_csv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/backup/tb_backup/Cattle_PAR_X_expressed_counts.csv") %>%
+Gene_order %>%
+  left_join(Cattle_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Human_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Chimpanzee_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Gorilla_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Bornean_orangutan_PAR_X_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  write_csv("/T2T_paper/Table_S16_PARGeneExpressionX.xlsx")
+
+# Notice: The saved table as been combined for different species before read in.
+PAR_X_expressed_counts_edited <- read_csv("/T2T_paper/Table_S16_PARGeneExpressionX.xlsx") %>%
   reshape2::melt()
 
 PAR_X_expressed_counts_edited$species[PAR_X_expressed_counts_edited$variable %in%colnames(Cattle_PAR_X_expressed_counts)] <- "Btau"
@@ -477,7 +479,7 @@ ggplot(PAR_X_expressed_counts_edited_cattle, aes(species,gene_id, fill= log(valu
 ## The conserved genes out of X PAR 
 ### Cattle
 ```{r}
-Cattle_count_anno_list_TMM <- readRDS("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/Expressed_genes/Cattle_count_anno_list_TMM.rds")
+Cattle_count_anno_list_TMM <- readRDS("/T2T_paper/Gene_expression_X_Y/Expressed_genes/Cattle_count_anno_list_TMM.rds")
 
 
 Cattle_count_anno_list_TMM$anno %>% filter(gene_biotype %in% "protein_coding") %>% extract2("gene_id") %>% unique() %>%length() # 16858 genes
@@ -487,7 +489,7 @@ Cattle_count_anno_list_TMM$anno %>% filter(gene_biotype %in% "protein_coding") %
 
 
 ```{r}
-Cattle_outPAR_X <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S4_Cattle_XY_gene_annotation_outPAR.xlsx", sheet = 1)
+Cattle_outPAR_X <- read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S13_outPARcattle.xlsx", sheet = 1)
 
 Cattle_outPAR_X$gene_id <- Cattle_outPAR_X$Annotation %>% gsub(";.*","",.)
 
@@ -544,7 +546,7 @@ ggplot(Cattle_outPAR_Y_expressed_counts, aes(species,Gene, fill= log(value))) +
 ```{r}
 Cattle_count_anno_list_TMM_Y <- subset(Cattle_count_anno_list_TMM$genes, Chr %in% "Y" )
 
-Cattle_PAR_Y <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S3_Y_gene_annotation_PAR.xlsx", sheet = 1)
+Cattle_PAR_Y <- read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S12_PARgenesY.xlsx", sheet = 1)
 
 Cattle_PAR_Y$gene_id <- Cattle_PAR_Y$Annotation %>% gsub(";.*","",.)  %>% gsub("gene_id","",.)
 Cattle_PAR_Y$gene_id <- gsub("\\\"","",Cattle_PAR_Y$gene_id)
@@ -559,7 +561,7 @@ Cattle_PAR_Y_expressed
 ```{r}
 Human_count_anno_list_TMM_Y <- subset(Human_count_anno_list_TMM$genes, Chr %in% "Y" )
 
-Human_PAR_Y <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S3_Y_gene_annotation_PAR.xlsx", sheet = 2)
+Human_PAR_Y <- read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S12_PARgenesY.xlsx", sheet = 2)
 
 
 Human_PAR_Y$gene_id <- Human_PAR_Y$Annotation %>% gsub(";.*","",.)  %>% gsub("gene_id","",.)
@@ -576,7 +578,7 @@ Human_PAR_Y_expressed
 ```{r}
 Chimpanzee_count_anno_list_TMM_Y <- subset(Chimpanzee_count_anno_list_TMM$genes, Chr %in% "Y" )
 
-Chimpanzee_PAR_Y <-read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S3_Y_gene_annotation_PAR.xlsx", sheet = 3)
+Chimpanzee_PAR_Y <-read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S12_PARgenesY.xlsx", sheet = 3)
 
 
 Chimpanzee_PAR_Y$gene_id <- Chimpanzee_PAR_Y$Annotation %>% gsub(";.*","",.)  %>% gsub("gene_id","",.)
@@ -594,7 +596,7 @@ Chimpanzee_PAR_Y_expressed
 ```{r}
 Gorilla_count_anno_list_TMM_Y <- subset(Gorilla_count_anno_list_TMM$genes, Chr %in% "Y" )
 
-Gorilla_PAR_Y <-read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S3_Y_gene_annotation_PAR.xlsx", sheet = 4)
+Gorilla_PAR_Y <-read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S12_PARgenesY.xlsx", sheet = 4)
 
 Gorilla_PAR_Y$gene_id <- Gorilla_PAR_Y$Annotation %>% gsub(";.*","",.)  %>% gsub("gene_id","",.)
 Gorilla_PAR_Y$gene_id <- gsub("ID=gene-","",Gorilla_PAR_Y$gene_id)
@@ -611,7 +613,7 @@ Gorilla_PAR_Y_expressed
 ```{r}
 Bornean_orangutan_count_anno_list_TMM_Y <- subset(Bornean_orangutan_count_anno_list_TMM$genes, Chr %in% "Y" )
 
-Bornean_orangutan_PAR_Y <-read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S3_Y_gene_annotation_PAR.xlsx", sheet = 5)
+Bornean_orangutan_PAR_Y <-read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S12_PARgenesY.xlsx", sheet = 5)
 
 
 Bornean_orangutan_PAR_Y$gene_id <- Bornean_orangutan_PAR_Y$Annotation %>% gsub(";.*","",.)  %>% gsub("gene_id","",.)
@@ -630,7 +632,7 @@ Bornean_orangutan_PAR_Y_expressed
 base::Reduce(intersect, list(Cattle_PAR_Y_expressed$Gene,Human_PAR_Y_expressed$Gene,Chimpanzee_PAR_Y_expressed$Gene, Gorilla_PAR_Y_expressed$Gene, Bornean_orangutan_PAR_Y_expressed$Gene))
 
 
-Gene_order <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/annotation_gene_order/Final_annotation_for_plot/Fig2_PAR_X/Gene_order_Fig2_PAR_Y_final.xlsx", col_names = F) %>%
+Gene_order <- read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Gene_order_PAR_Y_for_Fig5a.xlsx", col_names = F) %>%
   set_colnames("gene_id")
 
 Cattle_PAR_Y_expressed_counts <- Cattle_count_anno_list_TMM$counts[Cattle_PAR_Y_expressed$gene_id,] %>%
@@ -661,15 +663,16 @@ Bornean_orangutan_PAR_Y_expressed_counts <- Bornean_orangutan_count_anno_list_TM
   left_join(Bornean_orangutan_PAR_Y_expressed[,c("Gene","gene_id")], by = "gene_id")
 
 
-# Gene_order %>%
-#   left_join(Cattle_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Human_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Chimpanzee_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Gorilla_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   left_join(Bornean_orangutan_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
-#   write_csv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/PAR_Y_expressed_counts.csv")
+Gene_order %>%
+  left_join(Cattle_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Human_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Chimpanzee_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Gorilla_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  left_join(Bornean_orangutan_PAR_Y_expressed_counts[,-1], by = c("gene_id" = "Gene")) %>%
+  write_csv("/T2T_paper/Table_S17_PARGeneExpressionY.xlsx")
 
-PAR_Y_expressed_counts_edited <- read_csv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/PAR_Y_expressed_counts_edited.csv") %>%
+# Notice: The saved table as been combined for different species before read in.
+PAR_Y_expressed_counts_edited <- read_csv("/T2T_paper/Table_S17_PARGeneExpressionY.xlsx") %>%
   reshape2::melt()
 
 PAR_Y_expressed_counts_edited$species[PAR_Y_expressed_counts_edited$variable %in%colnames(Cattle_PAR_Y_expressed_counts)] <- "Btau"
@@ -710,7 +713,7 @@ ggplot(PAR_Y_expressed_counts_edited_cattle, aes(species,gene_id, fill= log(valu
 ```{r}
 Cattle_count_anno_list_TMM_Y <- subset(Cattle_count_anno_list_TMM$genes, Chr %in% "Y" )
 
-Cattle_outPAR_Y <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S4_Cattle_XY_gene_annotation_outPAR.xlsx", sheet = 2)
+Cattle_outPAR_Y <- read_xlsx("/T2T_paper/Gene_expression_X_Y/Testis_gene_expression/Inputs/Table_S13_outPARcattle.xlsx", sheet = 2)
 
 Cattle_outPAR_Y$gene_id <- Cattle_outPAR_Y$Annotation %>% gsub(";.*","",.)  %>% gsub("gene_id","",.)
 Cattle_outPAR_Y$gene_id <- gsub("\\\"","",Cattle_outPAR_Y$gene_id)
@@ -738,7 +741,7 @@ Cattle_count_anno_final_expression_centromere_X <- Cattle_gene_annotation_PEP_ac
 
 Cattle_gene_annotation_PEP_activeGenes_GRange_X[queryHits(activeGenes_centromere_X),] %>%
   as.data.frame() %>%
-   write_tsv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/FPKM_expression/Cattle_count_anno_final_expression_centromere_X.tsv")
+   write_tsv("/T2T_paper/Gene_expression_X_Y/FPKM_expression/Cattle_count_anno_final_expression_centromere_X.tsv")
 
 
 Cattle_gene_annotation_PEP_activeGenes_GRange_X <- mcols(Cattle_gene_annotation_PEP_activeGenes_GRange_X)
@@ -757,7 +760,7 @@ wilcox.test(subset(Cattle_gene_annotation_PEP_activeGenes_GRange_X,in_centromere
 
 ### Human
 ```{r}
-Human_count_anno_final_expression <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S6_All_expressed_counts_feature_count.xlsx", sheet = 2, col_types = c("text")) #Human
+Human_count_anno_final_expression <- read_xlsx("/T2T_paper/Testis_gene_expression/Inputs/Table_S15_GeneExpression.xlsx", sheet = 2, col_types = c("text")) #Human
 
 Human_count_anno_final_expression_GRange <- makeGRangesFromDataFrame(Human_count_anno_final_expression)
 mcols(Human_count_anno_final_expression_GRange) <- Human_count_anno_final_expression
@@ -776,7 +779,7 @@ Human_count_anno_final_expression_centromere_X <- Human_gene_annotation_PEP_acti
 
 Human_gene_annotation_PEP_activeGenes_GRange_X[queryHits(activeGenes_centromere_X),] %>%
   as.data.frame() %>%
-   write_tsv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/FPKM_expression/Human_count_anno_final_expression_centromere_X.tsv")
+   write_tsv("/T2T_paper/Gene_expression_X_Y/FPKM_expression/Human_count_anno_final_expression_centromere_X.tsv")
 
 
 Human_gene_annotation_PEP_activeGenes_GRange_X <- mcols(Human_gene_annotation_PEP_activeGenes_GRange_X)
@@ -795,7 +798,7 @@ wilcox.test(subset(Human_gene_annotation_PEP_activeGenes_GRange_X,in_centromere 
 
 ### Chimpanzee
 ```{r}
-Chimpanzee_count_anno_final_expression <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S6_All_expressed_counts_feature_count.xlsx", sheet = 3, col_types = c("text")) #Chimpanzee
+Chimpanzee_count_anno_final_expression <- read_xlsx("/T2T_paper/Testis_gene_expression/Inputs/Table_S15_GeneExpression.xlsx", sheet = 3, col_types = c("text")) #Chimpanzee
 
 Chimpanzee_count_anno_final_expression_GRange <- makeGRangesFromDataFrame(Chimpanzee_count_anno_final_expression)
 mcols(Chimpanzee_count_anno_final_expression_GRange) <- Chimpanzee_count_anno_final_expression
@@ -814,7 +817,7 @@ Chimpanzee_count_anno_final_expression_centromere_X <- Chimpanzee_gene_annotatio
 
 Chimpanzee_gene_annotation_PEP_activeGenes_GRange_X[queryHits(activeGenes_centromere_X),] %>%
   as.data.frame() %>%
-   write_tsv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/FPKM_expression/Chimpanzee_count_anno_final_expression_centromere_X.tsv")
+   write_tsv("/T2T_paper/Gene_expression_X_Y/FPKM_expression/Chimpanzee_count_anno_final_expression_centromere_X.tsv")
 
 
 Chimpanzee_gene_annotation_PEP_activeGenes_GRange_X <- mcols(Chimpanzee_gene_annotation_PEP_activeGenes_GRange_X)
@@ -833,7 +836,7 @@ wilcox.test(subset(Chimpanzee_gene_annotation_PEP_activeGenes_GRange_X,in_centro
 
 ### Gorilla
 ```{r}
-Gorilla_count_anno_final_expression <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S6_All_expressed_counts_feature_count.xlsx", sheet = 4, col_types = c("text")) #Gorilla
+Gorilla_count_anno_final_expression <- read_xlsx("/T2T_paper/Testis_gene_expression/Inputs/Table_S15_GeneExpression.xlsx", sheet = 4, col_types = c("text")) #Gorilla
 
 Gorilla_count_anno_final_expression_GRange <- makeGRangesFromDataFrame(Gorilla_count_anno_final_expression)
 mcols(Gorilla_count_anno_final_expression_GRange) <- Gorilla_count_anno_final_expression
@@ -852,7 +855,7 @@ Gorilla_count_anno_final_expression_centromere_X <- Gorilla_gene_annotation_PEP_
 
 Gorilla_gene_annotation_PEP_activeGenes_GRange_X[queryHits(activeGenes_centromere_X),] %>%
   as.data.frame() %>%
-   write_tsv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/FPKM_expression/Gorilla_count_anno_final_expression_centromere_X.tsv")
+   write_tsv("/T2T_paper/Gene_expression_X_Y/FPKM_expression/Gorilla_count_anno_final_expression_centromere_X.tsv")
 
 
 Gorilla_gene_annotation_PEP_activeGenes_GRange_X <- mcols(Gorilla_gene_annotation_PEP_activeGenes_GRange_X)
@@ -871,7 +874,7 @@ wilcox.test(subset(Gorilla_gene_annotation_PEP_activeGenes_GRange_X,in_centromer
 
 ### Bornean_orangutan
 ```{r}
-Bornean_orangutan_count_anno_final_expression <- read_xlsx("/Users/tongchen/Documents/Kelly_2024/T2T_paper/2T2_manuscript/Kel_t2t_12112024/Kel_sup_tables/Table_KEL-S6_All_expressed_counts_feature_count.xlsx", sheet = 5, col_types = c("text")) #Bornean_orangutan
+Bornean_orangutan_count_anno_final_expression <- read_xlsx("/T2T_paper/Testis_gene_expression/Inputs/Table_S15_GeneExpression.xlsx", sheet = 5, col_types = c("text")) #Bornean_orangutan
 
 Bornean_orangutan_count_anno_final_expression_GRange <- makeGRangesFromDataFrame(Bornean_orangutan_count_anno_final_expression)
 mcols(Bornean_orangutan_count_anno_final_expression_GRange) <- Bornean_orangutan_count_anno_final_expression
@@ -890,7 +893,7 @@ Bornean_orangutan_count_anno_final_expression_centromere_X <- Bornean_orangutan_
 
 Bornean_orangutan_gene_annotation_PEP_activeGenes_GRange_X[queryHits(activeGenes_centromere_X),] %>%
   as.data.frame() %>%
-   write_tsv("/Users/tongchen/Documents/Kelly_2024/T2T_paper/Gene_expression_X_Y/FPKM_expression/Bornean_orangutan_count_anno_final_expression_centromere_X.tsv")
+   write_tsv("/T2T_paper/Gene_expression_X_Y/FPKM_expression/Bornean_orangutan_count_anno_final_expression_centromere_X.tsv")
 
 
 Bornean_orangutan_gene_annotation_PEP_activeGenes_GRange_X <- mcols(Bornean_orangutan_gene_annotation_PEP_activeGenes_GRange_X)
