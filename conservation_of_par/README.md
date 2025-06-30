@@ -1,4 +1,3 @@
 Refer to:
 
-- Conservation of pseudoautosomal regions (PARs) in the main text Methods section
-- Conservation of pseudoautosomal regions (PARs)  in the Supplementary Information (Supplementary Methods)
+- Conservation of pseudoautosomal regions (PARs) and no-PAR can be found in the Methods section and Supplementary Information (Supplementary Methods).
