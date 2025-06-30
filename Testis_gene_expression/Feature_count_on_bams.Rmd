@@ -1,0 +1,996 @@
+---
+title: "This script is for running the FeatureCount on bam files."
+author: "Kelly"
+date: "27/11/2024"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Loading packages
+
+```{r packages}
+library(readr)
+library(ggplot2)
+library(tibble)
+library(magrittr)
+library(Rsubread)
+library(dplyr)
+library(tidyr)
+```
+
+# Running FeatureCount on our selected data
+## Cattle
+
+```{r}
+# The sorted bam files for cattle were saved in the following path
+sortbam <- dir("/T2T_paper/Gene_expression_X_Y/Cattle", pattern=".bam", full.names = T)
+
+# The UOA_Wagyu_1_Y.gtf annotation file can be download on NCBI
+countsensembl <- featureCounts(sortbam,annot.ext="/T2T_paper/Gene_expression_X_Y/Cattle/UOA_Wagyu_1_Y.gtf",isGTFAnnotationFile=TRUE,
+                               GTF.featureType="gene",
+                               GTF.attrType = "gene_id",
+                               isPairedEnd=TRUE,
+                               reportReads=NULL)
+
+# Save the results out as rda format
+save(countsensembl,file="/T2T_paper/Gene_expression_X_Y/Cattle/counts_Cattle_UOA_Wagyu_1_Y.rda")
+
+#         ==========     _____ _    _ ____  _____  ______          _____  
+#         =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+#           =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+#             ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+#               ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+#         ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+#        Rsubread 2.18.0
+# 
+# //========================== featureCounts setting ===========================\\
+# ||                                                                            ||
+# ||             Input files : 14 BAM files                                     ||
+# ||                                                                            ||
+# ||                           ERR10186686.sorted.bam                           ||
+# ||                           ERR10186690.sorted.bam                           ||
+# ||                           ERR10186705.sorted.bam                           ||
+# ||                           ERR10186714.sorted.bam                           ||
+# ||                           ERR10186716.sorted.bam                           ||
+# ||                           SRR10123379.sorted.bam                           ||
+# ||                           SRR10123380.sorted.bam                           ||
+# ||                           SRR10123381.sorted.bam                           ||
+# ||                           SRR10123382.sorted.bam                           ||
+# ||                           SRR10123383.sorted.bam                           ||
+# ||                           SRR10123384.sorted.bam                           ||
+# ||                           SRR27841608.sorted.bam                           ||
+# ||                           SRR27841609.sorted.bam                           ||
+# ||                           SRR27841610.sorted.bam                           ||
+# ||                                                                            ||
+# ||              Paired-end : yes                                              ||
+# ||        Count read pairs : yes                                              ||
+# ||              Annotation : UOA_Wagyu_1_Y.gtf (GTF)                          ||
+# ||      Dir for temp files : .                                                ||
+# ||                 Threads : 1                                                ||
+# ||                   Level : meta-feature level                               ||
+# ||      Multimapping reads : counted                                          ||
+# || Multi-overlapping reads : not counted                                      ||
+# ||   Min overlapping bases : 1                                                ||
+# ||                                                                            ||
+# \\============================================================================//
+# 
+# //================================= Running ==================================\\
+# ||                                                                            ||
+# || Load annotation file UOA_Wagyu_1_Y.gtf ...                                 ||
+# ||    Features : 42167                                                        ||
+# ||    Meta-features : 42167                                                   ||
+# ||    Chromosomes/contigs : 247                                               ||
+# ||                                                                            ||
+# || Process BAM file ERR10186686.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 78916870                                             ||
+# ||    Successfully assigned alignments : 62716222 (79.5%)                     ||
+# ||    Running time : 1.58 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file ERR10186690.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 84588263                                             ||
+# ||    Successfully assigned alignments : 67680998 (80.0%)                     ||
+# ||    Running time : 1.69 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file ERR10186705.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 82417842                                             ||
+# ||    Successfully assigned alignments : 66374293 (80.5%)                     ||
+# ||    Running time : 1.69 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file ERR10186714.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 82794026                                             ||
+# ||    Successfully assigned alignments : 66040904 (79.8%)                     ||
+# ||    Running time : 1.78 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file ERR10186716.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 89015494                                             ||
+# ||    Successfully assigned alignments : 70653117 (79.4%)                     ||
+# ||    Running time : 1.89 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR10123379.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 26222505                                             ||
+# ||    Successfully assigned alignments : 22602218 (86.2%)                     ||
+# ||    Running time : 0.53 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR10123380.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 27326061                                             ||
+# ||    Successfully assigned alignments : 23542513 (86.2%)                     ||
+# ||    Running time : 0.55 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR10123381.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 27402718                                             ||
+# ||    Successfully assigned alignments : 23608539 (86.2%)                     ||
+# ||    Running time : 0.55 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR10123382.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 27747650                                             ||
+# ||    Successfully assigned alignments : 22761798 (82.0%)                     ||
+# ||    Running time : 0.55 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR10123383.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 27274332                                             ||
+# ||    Successfully assigned alignments : 22188177 (81.4%)                     ||
+# ||    Running time : 0.55 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR10123384.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 27238877                                             ||
+# ||    Successfully assigned alignments : 22366867 (82.1%)                     ||
+# ||    Running time : 0.54 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR27841608.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 46337995                                             ||
+# ||    Successfully assigned alignments : 35867139 (77.4%)                     ||
+# ||    Running time : 1.06 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR27841609.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 44949105                                             ||
+# ||    Successfully assigned alignments : 33642170 (74.8%)                     ||
+# ||    Running time : 1.10 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR27841610.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 48598371                                             ||
+# ||    Successfully assigned alignments : 36303230 (74.7%)                     ||
+# ||    Running time : 1.29 minutes                                             ||
+# ||                                                                            ||
+# || Write the final count table.                                               ||
+# || Write the read assignment summary.                                         ||
+# ||                                                                            ||
+# \\============================================================================//
+
+
+```
+
+
+```{r}
+#format the wagyu annotation and save as the rda
+ebi_anno_gtf <- read_tsv("/T2T_paper/Gene_expression_X_Y/Cattle/UOA_Wagyu_1_Y.gtf",
+                         comment = "#", col_names = FALSE,
+                         col_types = list(col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_integer(),
+                                          col_integer(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character()))
+
+colnames(ebi_anno_gtf) <- c("chr","source","feature","start","end","score","strand","frame","attributes")
+
+ebi_anno_gtf_gene <- ebi_anno_gtf %>% filter(feature == "gene")
+
+#separate the attributes column
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene %>% 
+  separate(attributes, c("gene_id","gene_version","gene_name","gene_source","gene_biotype"),sep = ";",extra = "drop", fill = "right")
+
+#tidy up the values in gene_id, gene_name and gene_biotype
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("gene_id \"","",ebi_anno_gtf_gene_as_df$gene_id)
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_id)
+
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("gene_biotype \"","",ebi_anno_gtf_gene_as_df$gene_biotype)
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_biotype)
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("^ ","",ebi_anno_gtf_gene_as_df$gene_biotype)
+
+ebi_anno_gtf_gene_as_df$gene_source <- gsub("gene_biotype \"","",ebi_anno_gtf_gene_as_df$gene_source)
+ebi_anno_gtf_gene_as_df$gene_source <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_source)
+ebi_anno_gtf_gene_as_df$gene_source <- gsub("^ ","",ebi_anno_gtf_gene_as_df$gene_source)
+
+ebi_anno_gtf_gene_as_df$gene_name <- gsub("gene_name \"","",ebi_anno_gtf_gene_as_df$gene_name)
+ebi_anno_gtf_gene_as_df$gene_name <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_name)
+
+#if loop to check gene_source contains biotype and then modify biotype
+for (i in 1:nrow(ebi_anno_gtf_gene_as_df)){
+  if (ebi_anno_gtf_gene_as_df$gene_source[i] != "gene_source ensembl"){
+    ebi_anno_gtf_gene_as_df$gene_biotype[i] <- ebi_anno_gtf_gene_as_df$gene_source[i]
+    ebi_anno_gtf_gene_as_df$gene_name[i] <- "not available"
+  }
+}
+
+#get wanted columns only
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene_as_df %>% select(chr:gene_id,gene_name,gene_biotype)
+
+save(ebi_anno_gtf_gene_as_df,file="/T2T_paper/Gene_expression_X_Y/Cattle/annotation_Cattle.UOA_Wagyu_1_Y.rda")
+```
+
+## Human
+```{r}
+sortbam <- dir("/T2T_paper/Gene_expression_X_Y/Human/", pattern=".bam", full.names = T)
+
+# Only run below once to get feature count saved
+countsensembl <- featureCounts(sortbam,annot.ext="/T2T_paper/Gene_expression_X_Y/Human/T2T-CHM13v2.0.gtf",
+isGTFAnnotationFile=TRUE,
+GTF.featureType = "gene",
+GTF.attrType = "gene_id",
+isPairedEnd=TRUE,
+reportReads=NULL)
+
+save(countsensembl,file="/T2T_paper/Gene_expression_X_Y/Human/counts_Human_T2T-CHM13v2.0.rda")
+# 
+#         ==========     _____ _    _ ____  _____  ______          _____  
+#         =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+#           =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+#             ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+#               ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+#         ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+#        Rsubread 2.18.0
+# 
+# //========================== featureCounts setting ===========================\\
+# ||                                                                            ||
+# ||             Input files : 4 BAM files                                      ||
+# ||                                                                            ||
+# ||                           SRR4421667.sorted.bam                            ||
+# ||                           SRR4422587.sorted.bam                            ||
+# ||                           SRR9849353.sorted.bam                            ||
+# ||                           SRR9849354.sorted.bam                            ||
+# ||                                                                            ||
+# ||              Paired-end : yes                                              ||
+# ||        Count read pairs : yes                                              ||
+# ||              Annotation : T2T-CHM13v2.0.gtf (GTF)                          ||
+# ||      Dir for temp files : .                                                ||
+# ||                 Threads : 1                                                ||
+# ||                   Level : meta-feature level                               ||
+# ||      Multimapping reads : counted                                          ||
+# || Multi-overlapping reads : not counted                                      ||
+# ||   Min overlapping bases : 1                                                ||
+# ||                                                                            ||
+# \\============================================================================//
+# 
+# //================================= Running ==================================\\
+# ||                                                                            ||
+# || Load annotation file T2T-CHM13v2.0.gtf ...                                 ||
+# ||    Features : 58479                                                        ||
+# ||    Meta-features : 58479                                                   ||
+# ||    Chromosomes/contigs : 24                                                ||
+# ||                                                                            ||
+# || Process BAM file SRR4421667.sorted.bam...                                  ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 28308813                                             ||
+# ||    Successfully assigned alignments : 18865522 (66.6%)                     ||
+# ||    Running time : 0.59 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR4422587.sorted.bam...                                  ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 26719843                                             ||
+# ||    Successfully assigned alignments : 19319892 (72.3%)                     ||
+# ||    Running time : 0.56 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR9849353.sorted.bam...                                  ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 25167170                                             ||
+# ||    Successfully assigned alignments : 19637946 (78.0%)                     ||
+# ||    Running time : 0.45 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR9849354.sorted.bam...                                  ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 23342433                                             ||
+# ||    Successfully assigned alignments : 18022411 (77.2%)                     ||
+# ||    Running time : 0.42 minutes                                             ||
+# ||                                                                            ||
+# || Write the final count table.                                               ||
+# || Write the read assignment summary.                                         ||
+# ||                                                                            ||
+# \\============================================================================//
+
+```
+
+
+```{r}
+#Human annotation
+ebi_anno_gtf <- read_tsv("/T2T_paper/Gene_expression_X_Y/Human/T2T-CHM13v2.0.gtf",
+                         comment = "#", col_names = FALSE,
+                         col_types = list(col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_integer(),
+                                          col_integer(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character()))
+
+colnames(ebi_anno_gtf) <- c("chr","source","feature","start","end","score","strand","frame","attributes")
+
+ebi_anno_gtf_gene <- ebi_anno_gtf %>% filter(feature == "gene")
+
+#separate the attributes column
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene %>% 
+  separate(attributes, c("gene_id","transcript_id","db_xref","description","gbkey","gene_name","gene_biotype"),sep = ";",extra = "drop", fill = "right")
+
+
+#tidy up the values in gene_id, gene_name and gene_biotype
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("gene_id \"","",ebi_anno_gtf_gene_as_df$gene_id)
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_id)
+
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("db_xref \"","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("GeneID:","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$db_xref)
+
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene$attributes %>% gsub(".*gene_biotype","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene_as_df$gene_biotype %>% gsub(";.*","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_biotype)
+
+ebi_anno_gtf_gene_as_df$gene_name <- ebi_anno_gtf_gene_as_df$db_xref
+
+#get wanted columns only
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene_as_df %>% select(chr:gene_id,gene_name,gene_biotype)
+
+save(ebi_anno_gtf_gene_as_df,file="/T2T_paper/Gene_expression_X_Y/Human/annotation_Human.T2T-CHM13v2.0.rda")
+```
+
+
+## Chimpanzee
+
+```{r}
+sortbam <- dir("/T2T_paper/Gene_expression_X_Y/Chimpanzee/PRJEB48233/bam", pattern=".bam", full.names = T)
+
+# Only run below once to get feature count saved
+countsensembl <- featureCounts(sortbam,annot.ext="/T2T_paper/Gene_expression_X_Y/Chimpanzee/Chimpanzee.T2Tv2.0.gtf",
+isGTFAnnotationFile=TRUE,
+GTF.featureType = "gene",
+GTF.attrType = "gene_id",
+isPairedEnd=FALSE,
+reportReads=NULL)
+
+save(countsensembl,file="/T2T_paper/Gene_expression_X_Y/Chimpanzee/counts_Chimpanzee_T2Tv2.0.rda")
+
+#         ==========     _____ _    _ ____  _____  ______          _____  
+#         =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+#           =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+#             ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+#               ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+#         ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+#        Rsubread 2.18.0
+# 
+# //========================== featureCounts setting ===========================\\
+# ||                                                                            ||
+# ||             Input files : 2 BAM files                                      ||
+# ||                                                                            ||
+# ||                           ERR7132962.sorted.bam                            ||
+# ||                           ERR7132963.sorted.bam                            ||
+# ||                                                                            ||
+# ||              Paired-end : no                                               ||
+# ||        Count read pairs : no                                               ||
+# ||              Annotation : Chimpanzee.T2Tv2.0.gtf (GTF)                     ||
+# ||      Dir for temp files : .                                                ||
+# ||                 Threads : 1                                                ||
+# ||                   Level : meta-feature level                               ||
+# ||      Multimapping reads : counted                                          ||
+# || Multi-overlapping reads : not counted                                      ||
+# ||   Min overlapping bases : 1                                                ||
+# ||                                                                            ||
+# \\============================================================================//
+# 
+# //================================= Running ==================================\\
+# ||                                                                            ||
+# || Load annotation file Chimpanzee.T2Tv2.0.gtf ...                            ||
+# ||    Features : 41815                                                        ||
+# ||    Meta-features : 41815                                                   ||
+# ||    Chromosomes/contigs : 26                                                ||
+# ||                                                                            ||
+# || Process BAM file ERR7132962.sorted.bam...                                  ||
+# ||    Single-end reads are included.                                          ||
+# ||    Total alignments : 32539506                                             ||
+# ||    Successfully assigned alignments : 24900677 (76.5%)                     ||
+# ||    Running time : 0.22 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file ERR7132963.sorted.bam...                                  ||
+# ||    Single-end reads are included.                                          ||
+# ||    Total alignments : 23740905                                             ||
+# ||    Successfully assigned alignments : 18244921 (76.9%)                     ||
+# ||    Running time : 0.17 minutes                                             ||
+# ||                                                                            ||
+# || Write the final count table.                                               ||
+# || Write the read assignment summary.                                         ||
+# ||                                                                            ||
+# \\============================================================================//
+```
+
+```{r}
+#Chimpanzee annotation
+ebi_anno_gtf <- read_tsv("/T2T_paper/Gene_expression_X_Y/Chimpanzee/Chimpanzee.T2Tv2.0.gtf",
+                         comment = "#", col_names = FALSE,
+                         col_types = list(col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_integer(),
+                                          col_integer(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character()))
+
+colnames(ebi_anno_gtf) <- c("chr","source","feature","start","end","score","strand","frame","attributes")
+
+ebi_anno_gtf_gene <- ebi_anno_gtf %>% filter(feature == "gene")
+
+#separate the attributes column
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene %>% 
+  separate(attributes, c("gene_id","transcript_id","db_xref","description","gbkey","gene_name","gene_biotype"),sep = ";",extra = "drop", fill = "right")
+
+
+#tidy up the values in gene_id, gene_name and gene_biotype
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("gene_id \"","",ebi_anno_gtf_gene_as_df$gene_id)
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_id)
+
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("db_xref \"","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("GeneID:","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$db_xref)
+
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene$attributes %>% gsub(".*gene_biotype","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene_as_df$gene_biotype %>% gsub(";.*","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_biotype)
+
+ebi_anno_gtf_gene_as_df$gene_name <- ebi_anno_gtf_gene_as_df$db_xref
+
+#get wanted columns only
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene_as_df %>% select(chr:gene_id,gene_name,gene_biotype)
+
+save(ebi_anno_gtf_gene_as_df,file="/T2T_paper/Gene_expression_X_Y/Chimpanzee/annotation_Chimpanzee.T2Tv2.0.rda")
+```
+
+## Gorilla
+### PRJEB48233
+```{r}
+sortbam <- dir("/T2T_paper/Gene_expression_X_Y/Gorilla/PRJEB48233/bam", pattern=".bam", full.names = T)
+
+# Only run below once to get feature count saved
+countsensembl <- featureCounts(sortbam,annot.ext="/T2T_paper/Gene_expression_X_Y/Gorilla/Gorilla.T2Tv2.0.gtf",
+isGTFAnnotationFile=TRUE,
+GTF.featureType = "gene",
+GTF.attrType = "gene_id",
+isPairedEnd=FALSE,
+reportReads=NULL)
+
+save(countsensembl,file="/T2T_paper/Gene_expression_X_Y/Gorilla/PRJEB48233/counts_PRJEB48233_Gorilla.T2Tv2.0.rda")
+
+#        ==========     _____ _    _ ____  _____  ______          _____  
+#         =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+#           =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+#             ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+#               ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+#         ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+#        Rsubread 2.18.0
+# 
+# //========================== featureCounts setting ===========================\\
+# ||                                                                            ||
+# ||             Input files : 2 BAM files                                      ||
+# ||                                                                            ||
+# ||                           ERR7132965.sorted.bam                            ||
+# ||                           ERR7132966.sorted.bam                            ||
+# ||                                                                            ||
+# ||              Paired-end : no                                               ||
+# ||        Count read pairs : no                                               ||
+# ||              Annotation : Gorilla.T2Tv2.0.gtf (GTF)                        ||
+# ||      Dir for temp files : .                                                ||
+# ||                 Threads : 1                                                ||
+# ||                   Level : meta-feature level                               ||
+# ||      Multimapping reads : counted                                          ||
+# || Multi-overlapping reads : not counted                                      ||
+# ||   Min overlapping bases : 1                                                ||
+# ||                                                                            ||
+# \\============================================================================//
+# 
+# //================================= Running ==================================\\
+# ||                                                                            ||
+# || Load annotation file Gorilla.T2Tv2.0.gtf ...                               ||
+# ||    Features : 41193                                                        ||
+# ||    Meta-features : 41193                                                   ||
+# ||    Chromosomes/contigs : 26                                                ||
+# ||                                                                            ||
+# || Process BAM file ERR7132965.sorted.bam...                                  ||
+# ||    Single-end reads are included.                                          ||
+# ||    Total alignments : 15385090                                             ||
+# ||    Successfully assigned alignments : 9107982 (59.2%)                      ||
+# ||    Running time : 0.10 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file ERR7132966.sorted.bam...                                  ||
+# ||    Single-end reads are included.                                          ||
+# ||    Total alignments : 38420921                                             ||
+# ||    Successfully assigned alignments : 26830643 (69.8%)                     ||
+# ||    Running time : 0.26 minutes                                             ||
+# ||                                                                            ||
+# || Write the final count table.                                               ||
+# || Write the read assignment summary.                                         ||
+# ||                                                                            ||
+# \\============================================================================//
+```
+
+### PRJNA304995
+
+```{r}
+sortbam <- dir("/T2T_paper/Gene_expression_X_Y/Gorilla/PRJNA304995/bam", pattern=".bam", full.names = T)
+
+# Only run below once to get feature count saved
+countsensembl <- featureCounts(sortbam,annot.ext="/T2T_paper/Gene_expression_X_Y/Gorilla/Gorilla.T2Tv2.0.gtf",
+isGTFAnnotationFile=TRUE,
+GTF.featureType = "gene",
+GTF.attrType = "gene_id",
+isPairedEnd=TRUE,
+reportReads=NULL)
+
+save(countsensembl,file="/T2T_paper/Gene_expression_X_Y/Gorilla/PRJNA304995/counts_PRJNA304995_Gorilla.T2Tv2.0.rda")
+
+#         ==========     _____ _    _ ____  _____  ______          _____  
+#         =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+#           =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+#             ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+#               ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+#         ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+#        Rsubread 2.18.0
+# 
+# //========================== featureCounts setting ===========================\\
+# ||                                                                            ||
+# ||             Input files : 1 BAM file                                       ||
+# ||                                                                            ||
+# ||                           SRR10393358.sorted.bam                           ||
+# ||                                                                            ||
+# ||              Paired-end : yes                                              ||
+# ||        Count read pairs : yes                                              ||
+# ||              Annotation : Gorilla.T2Tv2.0.gtf (GTF)                        ||
+# ||      Dir for temp files : .                                                ||
+# ||                 Threads : 1                                                ||
+# ||                   Level : meta-feature level                               ||
+# ||      Multimapping reads : counted                                          ||
+# || Multi-overlapping reads : not counted                                      ||
+# ||   Min overlapping bases : 1                                                ||
+# ||                                                                            ||
+# \\============================================================================//
+# 
+# //================================= Running ==================================\\
+# ||                                                                            ||
+# || Load annotation file Gorilla.T2Tv2.0.gtf ...                               ||
+# ||    Features : 41193                                                        ||
+# ||    Meta-features : 41193                                                   ||
+# ||    Chromosomes/contigs : 26                                                ||
+# ||                                                                            ||
+# || Process BAM file SRR10393358.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 7456599                                              ||
+# ||    Successfully assigned alignments : 3456506 (46.4%)                      ||
+# ||    Running time : 0.18 minutes                                             ||
+# ||                                                                            ||
+# || Write the final count table.                                               ||
+# || Write the read assignment summary.                                         ||
+# ||                                                                            ||
+# \\============================================================================//
+
+```
+
+```{r}
+#Gorilla annotation
+ebi_anno_gtf <- read_tsv("/T2T_paper/Gene_expression_X_Y/Gorilla/Gorilla.T2Tv2.0.gtf",
+                         comment = "#", col_names = FALSE,
+                         col_types = list(col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_integer(),
+                                          col_integer(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character()))
+
+colnames(ebi_anno_gtf) <- c("chr","source","feature","start","end","score","strand","frame","attributes")
+
+ebi_anno_gtf_gene <- ebi_anno_gtf %>% filter(feature == "gene")
+
+#separate the attributes column
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene %>% 
+  separate(attributes, c("gene_id","transcript_id","db_xref","description","gbkey","gene_name","gene_biotype"),sep = ";",extra = "drop", fill = "right")
+
+
+#tidy up the values in gene_id, gene_name and gene_biotype
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("gene_id \"","",ebi_anno_gtf_gene_as_df$gene_id)
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_id)
+
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("db_xref \"","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("GeneID:","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$db_xref)
+
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene$attributes %>% gsub(".*gene_biotype","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene_as_df$gene_biotype %>% gsub(";.*","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_biotype)
+
+ebi_anno_gtf_gene_as_df$gene_name <- ebi_anno_gtf_gene_as_df$db_xref
+
+#get wanted columns only
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene_as_df %>% select(chr:gene_id,gene_name,gene_biotype)
+
+save(ebi_anno_gtf_gene_as_df,file="/T2T_paper/Gene_expression_X_Y/Gorilla/annotation_Gorilla.T2Tv2.0.rda")
+```
+
+## Bornean_orangutan
+```{r}
+sortbam <- dir("/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/PRJNA587108/bam/", pattern=".bam", full.names = T)
+
+# Only run below once to get feature count saved
+countsensembl <- featureCounts(sortbam,annot.ext="/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/PRJNA587108/B_orangutan.T2Tv2.0.gtf",
+isGTFAnnotationFile=TRUE,
+GTF.featureType = "gene",
+GTF.attrType = "gene_id",
+isPairedEnd=TRUE,
+reportReads=NULL)
+
+save(countsensembl,file="/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/counts_B_orangutan_T2Tv2.0.gtf.rda")
+
+#         ==========     _____ _    _ ____  _____  ______          _____  
+#         =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+#           =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+#             ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+#               ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+#         ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+#        Rsubread 2.18.0
+# 
+# //========================== featureCounts setting ===========================\\
+# ||                                                                            ||
+# ||             Input files : 3 BAM files                                      ||
+# ||                                                                            ||
+# ||                           SRR10392516.sorted.bam                           ||
+# ||                           SRR2176206.sorted.bam                            ||
+# ||                           SRR2176207.sorted.bam                            ||
+# ||                                                                            ||
+# ||              Paired-end : yes                                              ||
+# ||        Count read pairs : yes                                              ||
+# ||              Annotation : B_orangutan.T2Tv2.0.gtf (GTF)                    ||
+# ||      Dir for temp files : .                                                ||
+# ||                 Threads : 1                                                ||
+# ||                   Level : meta-feature level                               ||
+# ||      Multimapping reads : counted                                          ||
+# || Multi-overlapping reads : not counted                                      ||
+# ||   Min overlapping bases : 1                                                ||
+# ||                                                                            ||
+# \\============================================================================//
+# 
+# //================================= Running ==================================\\
+# ||                                                                            ||
+# || Load annotation file B_orangutan.T2Tv2.0.gtf ...                           ||
+# ||    Features : 37517                                                        ||
+# ||    Meta-features : 37517                                                   ||
+# ||    Chromosomes/contigs : 26                                                ||
+# ||                                                                            ||
+# || Process BAM file SRR10392516.sorted.bam...                                 ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 14959528                                             ||
+# ||    Successfully assigned alignments : 10837826 (72.4%)                     ||
+# ||    Running time : 0.31 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR2176206.sorted.bam...                                  ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 7625799                                              ||
+# ||    Successfully assigned alignments : 5201518 (68.2%)                      ||
+# ||    Running time : 0.20 minutes                                             ||
+# ||                                                                            ||
+# || Process BAM file SRR2176207.sorted.bam...                                  ||
+# ||    Paired-end reads are included.                                          ||
+# ||    Total alignments : 5578172                                              ||
+# ||    Successfully assigned alignments : 3584526 (64.3%)                      ||
+# ||    Running time : 0.15 minutes                                             ||
+# ||                                                                            ||
+# || Write the final count table.                                               ||
+# || Write the read assignment summary.                                         ||
+# ||                                                                            ||
+# \\============================================================================//
+
+```
+
+
+```{r}
+#Bornean_orangutan annotation
+ebi_anno_gtf <- read_tsv("/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/B_orangutan.T2Tv2.0.gtf",
+                         comment = "#", col_names = FALSE,
+                         col_types = list(col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_integer(),
+                                          col_integer(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character(),
+                                          col_character()))
+
+colnames(ebi_anno_gtf) <- c("chr","source","feature","start","end","score","strand","frame","attributes")
+
+ebi_anno_gtf_gene <- ebi_anno_gtf %>% filter(feature == "gene")
+
+#separate the attributes column
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene %>% 
+  separate(attributes, c("gene_id","transcript_id","db_xref","description","gbkey","gene_name","gene_biotype"),sep = ";",extra = "drop", fill = "right")
+
+
+#tidy up the values in gene_id, gene_name and gene_biotype
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("gene_id \"","",ebi_anno_gtf_gene_as_df$gene_id)
+ebi_anno_gtf_gene_as_df$gene_id <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_id)
+
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("db_xref \"","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("GeneID:","",ebi_anno_gtf_gene_as_df$db_xref)
+ebi_anno_gtf_gene_as_df$db_xref <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$db_xref)
+
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene$attributes %>% gsub(".*gene_biotype","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- ebi_anno_gtf_gene_as_df$gene_biotype %>% gsub(";.*","",.)
+ebi_anno_gtf_gene_as_df$gene_biotype <- gsub("\\\"","",ebi_anno_gtf_gene_as_df$gene_biotype)
+
+ebi_anno_gtf_gene_as_df$gene_name <- ebi_anno_gtf_gene_as_df$db_xref
+
+#get wanted columns only
+ebi_anno_gtf_gene_as_df <- ebi_anno_gtf_gene_as_df %>% select(chr:gene_id,gene_name,gene_biotype)
+
+save(ebi_anno_gtf_gene_as_df,file="/T2T_paper/Gene_expression_X_Y/Bornean_orangutan/annotation_Bornean_orangutan.T2Tv2.0.rda")
+```
+
+
+# Download and analysis the gene exression data from cattlegtex (farmgtex)
+
+```{r}
+# the file 21564780 was downloaded from the database cattlegtex
+ load("/Downloads/21564780/all.8742samples.tpm.matrix.RData")
+ load("/Downloads/21564780/All.8742sample.count.matrix.RData")
+
+ # Checked a few genes that may expressed in the testis
+"ENSBTAG00085026178" %in% colnames(TPM_tmp0)
+"ENSBTAG00085025972" %in% colnames(TPM_tmp0)
+"ENSBTAG00085025932" %in% colnames(TPM_tmp0)
+
+"ENSBTAG00085026078" %in% colnames(TPM_tmp0)
+"ENSBTAG00085026039" %in% colnames(TPM_tmp0)
+"ENSBTAG00085025782" %in% colnames(TPM_tmp0)
+"ENSBTAG00085026004" %in% colnames(TPM_tmp0)
+"ENSBTAG00085025883" %in% colnames(TPM_tmp0)
+
+
+"ENSBTAG00085026178" %in% colnames(count_matrix_final) 
+"ENSBTAG00085025972" %in% colnames(count_matrix_final) 
+"ENSBTAG00085025932" %in% colnames(count_matrix_final)
+
+"ENSBTAG00085026078" %in% colnames(count_matrix_final)
+"ENSBTAG00085026039" %in% colnames(count_matrix_final)
+"ENSBTAG00085025782" %in% colnames(count_matrix_final)
+"ENSBTAG00085026004" %in% colnames(count_matrix_final)
+"ENSBTAG00085025883" %in% colnames(count_matrix_final)
+
+# cattlegtex is using reference ARS-UCD1.2
+Bos_taurus_ARS <- read_tsv("/Downloads/Bos_taurus.ARS-UCD1.2.110.gtf", col_names = F, comment = "#") %>% subset(X3 %in% "gene") %>% subset(X1 %in% "X")
+write_csv(Bos_taurus_ARS,"/Downloads/Bos_taurus.ARS-UCD1.2.110_X.csv")
+
+
+Bos_taurus_ARS[grep("OBP",Bos_taurus_ARS$X9),]
+Bos_taurus_ARS[grep("BDA20",Bos_taurus_ARS$X9),]
+
+count_matrix_final[,"ENSBTAG00000016820"] # BDA20
+
+"ENSBTAG00000012491" %in% colnames(count_matrix_final)
+"ENSBTAG00000053270" %in% colnames(count_matrix_final)
+"ENSBTAG00000049442" %in% colnames(count_matrix_final)
+"ENSBTAG00000052075" %in% colnames(count_matrix_final)
+"ENSBTAG00000025952" %in% colnames(count_matrix_final)
+"ENSBTAG00000025951" %in% colnames(count_matrix_final)
+"ENSBTAG00000016989" %in% colnames(count_matrix_final)
+
+BDA20_OBP_count <- count_matrix_final[,c("ENSBTAG00000016820","ENSBTAG00000012491","ENSBTAG00000053270","ENSBTAG00000049442","ENSBTAG00000052075","ENSBTAG00000025952","ENSBTAG00000025951","ENSBTAG00000016989")]
+
+# BDA20_OBP_count <- count_matrix_final[,c("ENSBTAG00000012491")] %>%
+# as.data.frame() %>%
+# set_colnames("ENSBTAG00000012491")
+
+BDA20_OBP_count <- count_matrix_final[,c("ENSBTAG00000016820")] %>%
+as.data.frame() %>%
+set_colnames("ENSBTAG00000016820")
+
+rownames(BDA20_OBP_count) <- rownames(count_matrix_final)
+
+BDA20_OBP_count <- rownames_to_column(BDA20_OBP_count,"samples")
+BDA20_OBP_count <- reshape2::melt(BDA20_OBP_count)
+
+# download from the cattlegtex
+metadata <- read_xlsx("/Downloads/41588_2022_1153_MOESM3_ESM.xlsx", sheet = 1, col_names = TRUE, skip = 1)
+
+BDA20_OBP_count %<>% left_join(metadata, by = c("samples" = "Sample"))
+
+BDA20_OBP_count <- BDA20_OBP_count[!is.na(BDA20_OBP_count$Tissue_class),]
+
+BDA20_OBP_count$Subspecies %>% table() # 8642 samples
+BDA20_OBP_count <- subset(BDA20_OBP_count, Subspecies %in% c("Bos indicus","Bos indicus × Bos taurus","Bos taurus","")) # 8352 samples
+
+
+ggplot(BDA20_OBP_count, aes(x=Tissue_class, y=value, fill=Tissue_class)) +
+geom_boxplot() + 
+theme_bw() +
+theme(legend.position = "none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(BDA20_OBP_count, aes(x=Sex, y=value, fill=Sex)) +
+  geom_boxplot() + 
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# clean up for age groups
+BDA20_OBP_count$Age %>% table()
+
+BDA20_OBP_count$Age[BDA20_OBP_count$Age %>% grep("year",.)] %>% table()
+BDA20_OBP_count$Age_group <- BDA20_OBP_count$Age
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "0.5 year"] <- "immature"
+
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group %>% grep("year",.)] %>% table()
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group %>% grep("year",.)] <- "mature"
+
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "Unknown/Embryo"] <- "immature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "12.91±8.69 months"] <- "Unknown"
+
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group %>% grep("month",.)] %>% table()
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "12 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "13.5 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "14 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "15-20 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "16-20 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "18 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "22 months"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "25 months"] <- "mature"
+
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "4~6y"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "4y"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "3"] <- "mature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group == "6"] <- "mature"
+
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group %>% grep("month",.)] <- "immature"
+BDA20_OBP_count$Age_group[BDA20_OBP_count$Age_group %>% grep("day",.)] <- "immature"
+
+BDA20_OBP_count$Age_group[!BDA20_OBP_count$Age_group %in% c("immature","mature","Unknown")] <- "immature"
+
+
+ggplot(BDA20_OBP_count, aes(x=Age_group, y=value, fill=Age_group)) +
+  geom_boxplot() + 
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(BDA20_OBP_count, aes(x=Tissue_class, y=value, fill=Age_group)) + 
+geom_boxplot() +
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+
+BDA20_OBP_count <- subset(BDA20_OBP_count, Age_group %in% c("mature","immature"))
+
+# clean up for tissues groups
+BDA20_OBP_count$Tissue_class[BDA20_OBP_count$Tissue_class %in% "Muscle (Cesar et al.)"] <- "Muscle"
+BDA20_OBP_count$Tissue_class %<>% gsub("_"," ",.)
+
+# plot to see the exoression of BDA20 in different age groups
+ggplot(BDA20_OBP_count, aes(x=Tissue_class, y=value, fill=Age_group)) + 
+geom_boxplot() +
+facet_wrap(~Age_group, dir= "v") +
+theme_bw()+
+theme(legend.position = "none",axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 12)) +
+xlab("") + 
+ylab("count") +
+labs("The expression of BDA20")
+
+```
+
+
+```{r}
+BDA20_OBP_tpm <- TPM_tmp0[,c("ENSBTAG00000016820")] %>%
+as.data.frame() %>%
+set_colnames("ENSBTAG00000016820")
+
+rownames(BDA20_OBP_tpm) <- rownames(TPM_tmp0)
+
+BDA20_OBP_tpm <- rownames_to_column(BDA20_OBP_tpm,"samples")
+BDA20_OBP_tpm <- reshape2::melt(BDA20_OBP_tpm)
+
+
+metadata <- read_xlsx("/Downloads/41588_2022_1153_MOESM3_ESM.xlsx", sheet = 1, col_names = TRUE, skip = 1)
+
+BDA20_OBP_tpm %<>% left_join(metadata, by = c("samples" = "Sample"))
+
+BDA20_OBP_tpm <- BDA20_OBP_tpm[!is.na(BDA20_OBP_tpm$Tissue_class),]
+
+BDA20_OBP_tpm$Subspecies %>% table() # 8642 samples
+BDA20_OBP_tpm <- subset(BDA20_OBP_tpm, Subspecies %in% c("Bos indicus","Bos indicus × Bos taurus","Bos taurus","")) # 8352 samples
+
+
+ggplot(BDA20_OBP_tpm, aes(x=Tissue_class, y=value, fill=Tissue_class)) +
+geom_boxplot() + 
+theme_bw() +
+theme(legend.position = "none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(BDA20_OBP_tpm, aes(x=Sex, y=value, fill=Sex)) +
+  geom_boxplot() + 
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+BDA20_OBP_tpm$Age %>% table()
+
+BDA20_OBP_tpm$Age[BDA20_OBP_tpm$Age %>% grep("year",.)] %>% table()
+BDA20_OBP_tpm$Age_group <- BDA20_OBP_tpm$Age
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "0.5 year"] <- "immature"
+
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group %>% grep("year",.)] %>% table()
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group %>% grep("year",.)] <- "mature"
+
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "Unknown/Embryo"] <- "immature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "12.91±8.69 months"] <- "Unknown"
+
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group %>% grep("month",.)] %>% table()
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "12 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "13.5 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "14 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "15-20 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "16-20 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "18 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "22 months"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "25 months"] <- "mature"
+
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "4~6y"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "4y"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "3"] <- "mature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group == "6"] <- "mature"
+
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group %>% grep("month",.)] <- "immature"
+BDA20_OBP_tpm$Age_group[BDA20_OBP_tpm$Age_group %>% grep("day",.)] <- "immature"
+
+BDA20_OBP_tpm$Age_group[!BDA20_OBP_tpm$Age_group %in% c("immature","mature","Unknown")] <- "immature"
+
+
+ggplot(BDA20_OBP_tpm, aes(x=Age_group, y=value, fill=Age_group)) +
+  geom_boxplot() + 
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(BDA20_OBP_tpm, aes(x=Tissue_class, y=value, fill=Age_group)) + 
+geom_boxplot() +
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+
+BDA20_OBP_tpm <- subset(BDA20_OBP_tpm, Age_group %in% c("mature","immature"))
+
+BDA20_OBP_tpm$Tissue_class[BDA20_OBP_tpm$Tissue_class %in% "Muscle (Cesar et al.)"] <- "Muscle"
+BDA20_OBP_tpm$Tissue_class %<>% gsub("_"," ",.)
+
+ggplot(BDA20_OBP_tpm, aes(x=Tissue_class, y=value, fill=Age_group)) + 
+geom_boxplot() +
+facet_wrap(~Age_group, dir= "v") +
+theme_bw()+
+theme(legend.position = "none",axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 12)) +
+xlab("") + 
+ylab("TPM") +
+labs("The expression of BDA20")
+```
+
+
