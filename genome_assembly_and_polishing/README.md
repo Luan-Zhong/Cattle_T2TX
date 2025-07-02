@@ -59,16 +59,16 @@
 9. To assemble the genomes using hifiasm with 58x HiFi, 57x HERRO corrected reads and 121x ONT (filtered to >40kb)
 
             hifiasm -o hifiasm_run1 -t 32 \
-                  -1 /hpcfs/users/a1223107/Tuli_x_Wagyu_data/hifiasm_based_assemblies/yak_file/pat.yak \
-                  -2 /hpcfs/users/a1223107/Tuli_x_Wagyu_data/hifiasm_based_assemblies/yak_file/mat.yak \
+                  -1 hifiasm_based_assemblies/yak_file/pat.yak \
+                  -2 hifiasm_based_assemblies/yak_file/mat.yak \
                   --ul TulixWagyu_ONT_Dorado/ONT_TxW_Filt40k_107x.fastq.gz,TulixWagyu_ONT_Dorado/ONT_TxW_Filt40k_14x.fastq.gz \
                   TulixWagyu_HERRO/herro_57x_q10_l10k.fastq.gz tencells.fastq.gz
 
 9. To assemble the genomes using hifiasm with 58x HiFi and 121x ONT (filtered to >40kb)
 
             hifiasm -o hifiasm_run1 -t 32 \
-                  -1 /hpcfs/users/a1223107/Tuli_x_Wagyu_data/hifiasm_based_assemblies/yak_file/pat.yak \
-                  -2 /hpcfs/users/a1223107/Tuli_x_Wagyu_data/hifiasm_based_assemblies/yak_file/mat.yak \
+                  -1 /hifiasm_based_assemblies/yak_file/pat.yak \
+                  -2 hifiasm_based_assemblies/yak_file/mat.yak \
                   --ul TulixWagyu_ONT_Dorado/ONT_TxW_Filt40k_107x.fastq.gz,TulixWagyu_ONT_Dorado/ONT_TxW_Filt40k_14x.fastq.gz \
                   tencells.fastq.gz
 
